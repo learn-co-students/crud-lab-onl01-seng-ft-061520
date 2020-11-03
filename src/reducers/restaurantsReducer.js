@@ -1,19 +1,19 @@
 import cuid from 'cuid';
 
-export default function manageRestaurants(state = {
-  restaurants: []
-}, action) {
+function restaurantsReducer(state = [], action) {
   switch (action.type) {
     case 'ADD_RESTAURANT':
       const restaurant = {
         id: cuid(),
         text: action.name
       }
-      return { restaurants: state.restaurants.concat(restaurant) };
+      return state.concat(restaurant);
       // return { ...state, bands: [...state.bands, action.name] }
     case 'DELETE_RESTAURANT':
-      return {restaurants: state.restaurants.filter(r => r.id !== action.id)}
+      return state.filter(r => r.id !== action.id);
     default:
       return state;
   }
 };
+
+export default restaurantsReducer;
